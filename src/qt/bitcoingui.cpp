@@ -948,7 +948,7 @@ void BitcoinGUI::updateStakingIcon()
         }
 
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_on").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-        labelStakingIcon->setToolTip(tr("Staking.<br>Your weight is %1<br>Network weight is %2<br>Expected time to earn reward is %3").arg(nWeight).arg(nNetworkWeight).arg(text));
+        labelStakingIcon->setToolTip(tr("Forging.<br>Your weight is %1<br>Network weight is %2<br>Expected time to earn reward is %3").arg(nWeight).arg(nNetworkWeight).arg(text));
     }
     else
     {
@@ -956,14 +956,14 @@ void BitcoinGUI::updateStakingIcon()
 		
         labelStakingIcon->setPixmap(QIcon(":/icons/staking_off").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
         if (pwalletMain && pwalletMain->IsLocked())
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is locked<br>Network weight is %1").arg(nNetworkWeight));
+            labelStakingIcon->setToolTip(tr("Not forging because wallet is locked<br>Network weight is %1").arg(nNetworkWeight));
         else if (vNodes.empty())
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is offline<br>Network weight is %1").arg(nNetworkWeight));
+            labelStakingIcon->setToolTip(tr("Not forging because wallet is offline<br>Network weight is %1").arg(nNetworkWeight));
         else if (IsInitialBlockDownload())
-            labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing<br>Network weight is %1").arg(nNetworkWeight));
+            labelStakingIcon->setToolTip(tr("Not forging because wallet is syncing<br>Network weight is %1").arg(nNetworkWeight));
         else if (!nWeight)
-            labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins<br>Network weight is %1").arg(nNetworkWeight));
+            labelStakingIcon->setToolTip(tr("Not forging because you don't have mature coins<br>Network weight is %1").arg(nNetworkWeight));
         else
-            labelStakingIcon->setToolTip(tr("Not staking"));
+            labelStakingIcon->setToolTip(tr("Not forging"));
     }
 }

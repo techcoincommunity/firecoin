@@ -33,7 +33,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget *parent) :
             ui->passLabel1->hide();
             ui->passEdit1->hide();
             ui->warningLabel->setText(tr("Enter the new passphrase to the wallet.<br/>Please use a passphrase of <b>10 or more random characters</b>, or <b>eight or more words</b>."));
-            setWindowTitle(tr("Encrypt wallet"));
+            setWindowTitle(tr("Fireproof wallet"));
             break;
         case UnlockStaking:
             ui->stakingCheckBox->setChecked(true);
@@ -103,8 +103,8 @@ void AskPassphraseDialog::accept()
             // Cannot encrypt with empty passphrase
             break;
         }
-        QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm wallet encryption"),
-                 tr("Warning: If you encrypt your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR COINS</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
+        QMessageBox::StandardButton retval = QMessageBox::question(this, tr("Confirm wallet fireproofing"),
+                 tr("Warning: If you fireproof your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR COINS</b>!") + "<br><br>" + tr("Are you sure you wish to fireproof your wallet?"),
                  QMessageBox::Yes|QMessageBox::Cancel,
                  QMessageBox::Cancel);
         if(retval == QMessageBox::Yes)
@@ -113,29 +113,29 @@ void AskPassphraseDialog::accept()
             {
                 if(model->setWalletEncrypted(true, newpass1))
                 {
-                    QMessageBox::warning(this, tr("Wallet encrypted"),
+                    QMessageBox::warning(this, tr("Wallet fireproofed"),
                                          "<qt>" + 
-                                         tr("Firecoin will close now to finish the encryption process. "
-                                         "Remember that encrypting your wallet cannot fully protect "
+                                         tr("Firecoin will close now to finish the fireproofing process. "
+                                         "Remember that fireproofing your wallet cannot fully protect "
                                          "your coins from being stolen by malware infecting your computer.") + 
                                          "<br><br><b>" + 
                                          tr("IMPORTANT: Any previous backups you have made of your wallet file "
-                                         "should be replaced with the newly generated, encrypted wallet file. "
-                                         "For security reasons, previous backups of the unencrypted wallet file "
-                                         "will become useless as soon as you start using the new, encrypted wallet.") + 
+                                         "should be replaced with the newly generated, fireproofed wallet file. "
+                                         "For security reasons, previous backups of the unfireproofed wallet file "
+                                         "will become useless as soon as you start using the new, fireproofed wallet.") + 
                                          "</b></qt>");
                     QApplication::quit();
                 }
                 else
                 {
-                    QMessageBox::critical(this, tr("Wallet encryption failed"),
-                                         tr("Wallet encryption failed due to an internal error. Your wallet was not encrypted."));
+                    QMessageBox::critical(this, tr("Wallet fireproofing failed"),
+                                         tr("Wallet fireproofing failed due to an internal error. Your wallet was not fireproofed."));
                 }
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encryption failed"),
+                QMessageBox::critical(this, tr("Wallet fireproofing failed"),
                                      tr("The supplied passphrases do not match."));
             }
         }
@@ -173,19 +173,19 @@ void AskPassphraseDialog::accept()
         {
             if(model->changePassphrase(oldpass, newpass1))
             {
-                QMessageBox::information(this, tr("Wallet encrypted"),
+                QMessageBox::information(this, tr("Wallet fireproofed"),
                                      tr("Wallet passphrase was successfully changed."));
                 QDialog::accept(); // Success
             }
             else
             {
-                QMessageBox::critical(this, tr("Wallet encryption failed"),
+                QMessageBox::critical(this, tr("Wallet fireproofing failed"),
                                      tr("The passphrase entered for the wallet decryption was incorrect."));
             }
         }
         else
         {
-            QMessageBox::critical(this, tr("Wallet encryption failed"),
+            QMessageBox::critical(this, tr("Wallet fireproofing failed"),
                                  tr("The supplied passphrases do not match."));
         }
         break;
